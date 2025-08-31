@@ -1,22 +1,38 @@
 'use strict';
 
-const inputs = document.querySelectorAll('form input');
+const inputElements = [...document.querySelectorAll('input')];
 
-for (const input of inputs) {
-  const label = document.createElement('label');
+inputElements.forEach((el) => {
+  const newLabel = document.createElement('label');
 
-  label.classList.add('field-label');
+  newLabel.classList.add('field-label');
+  newLabel.setAttribute('for', el.id);
+  newLabel.textContent = el.name;
 
-  if (!input.id) {
-    input.id = 'sign-in-' + input.name;
-  }
+  const placeholderText = el.name.charAt(0).toUpperCase() + el.name.slice(1);
 
-  label.setAttribute('for', input.id);
-  label.textContent = input.name;
+  el.setAttribute('placeholder', placeholderText);
 
-  input.before(label);
+  el.before(newLabel);
+});
 
-  const placeholderText = input.name[0].toUpperCase() + input.name.slice(1);
+// const inputs = document.querySelectorAll('form input');
 
-  input.setAttribute('placeholder', placeholderText);
-}
+// for (const input of inputs) {
+//   const label = document.createElement('label');
+
+//   label.classList.add('field-label');
+
+//   if (!input.id) {
+//     input.id = 'sign-in-' + input.name;
+//   }
+
+//   label.setAttribute('for', input.id);
+//   label.textContent = input.name;
+
+//   input.before(label);
+
+//   const placeholderText = input.name[0].toUpperCase() + input.name.slice(1);
+
+//   input.setAttribute('placeholder', placeholderText);
+// }
